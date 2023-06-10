@@ -1,59 +1,23 @@
-package com.driver.services.impl;
+package com.driver.services;
 
-import com.driver.model.TripBooking;
-import com.driver.services.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import com.driver.model.Customer;
 import com.driver.model.Driver;
-import com.driver.repository.CustomerRepository;
-import com.driver.repository.DriverRepository;
-import com.driver.repository.TripBookingRepository;
-import com.driver.model.TripStatus;
+import com.driver.model.TripBooking;
 
-import java.util.ArrayList;
-import java.util.List;
 
-@Service
-public class CustomerServiceImpl implements CustomerService {
+public interface CustomerService {
 
-	@Autowired
-	CustomerRepository customerRepository2;
+    public void register(Customer customer);
 
-	@Autowired
-	DriverRepository driverRepository2;
+    public void deleteCustomer(Integer customerId);
 
-	@Autowired
-	TripBookingRepository tripBookingRepository2;
+    public TripBooking bookTrip(int customerId, String fromLocation, String toLocation, int distanceInKm) throws Exception;
 
-	@Override
-	public void register(Customer customer) {
-		//Save the customer in database
-	}
+    public void cancelTrip(Integer tripId);
 
-	@Override
-	public void deleteCustomer(Integer customerId) {
-		// Delete customer without using deleteById function
+    public void completeTrip(Integer tripId);
 
-	}
-
-	@Override
-	public TripBooking bookTrip(int customerId, String fromLocation, String toLocation, int distanceInKm) throws Exception{
-		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE). If no driver is available, throw "No cab available!" exception
-		//Avoid using SQL query
-
-	}
-
-	@Override
-	public void cancelTrip(Integer tripId){
-		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
-
-	}
-
-	@Override
-	public void completeTrip(Integer tripId){
-		//Complete the trip having given trip Id and update TripBooking attributes accordingly
-
-	}
 }
