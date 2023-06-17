@@ -1,64 +1,20 @@
-package com.driver.services.impl;
+package com.driver.services;
 
 import java.util.List;
-
-import com.driver.services.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.driver.model.Admin;
 import com.driver.model.Customer;
 import com.driver.model.Driver;
-import com.driver.repository.AdminRepository;
-import com.driver.repository.CustomerRepository;
-import com.driver.repository.DriverRepository;
 
-@Service
-public class AdminServiceImpl implements AdminService {
+public interface AdminService {
 
-	@Autowired
-	AdminRepository adminRepository1;
+    public void adminRegister(Admin admin);
 
-	@Autowired
-	DriverRepository driverRepository1;
+    public Admin updatePassword(Integer adminId, String password);
 
-	@Autowired
-	CustomerRepository customerRepository1;
+    public void deleteAdmin(int adminId);
 
-	@Override
-	public void adminRegister(Admin admin) {
-		//Save the admin in the database
-		adminRepository1.save(admin);
-	}
+    public List<Driver> getListOfDrivers();
 
-	@Override
-	public Admin updatePassword(Integer adminId, String password) {
-		//Update the password of admin with given id
-		Admin admin = adminRepository1.findById(adminId).get();
-		admin.setPassword(password);
-		adminRepository1.save(admin);
-
-		return admin;
-
-	}
-
-	@Override
-	public void deleteAdmin(int adminId){
-		// Delete admin without using deleteById function
-		Admin admin = adminRepository1.findById(adminId).get();
-		adminRepository1.delete(admin);
-	}
-
-	@Override
-	public List<Driver> getListOfDrivers() {
-		//Find the list of all drivers
-		return driverRepository1.findAll();
-	}
-
-	@Override
-	public List<Customer> getListOfCustomers() {
-		//Find the list of all customers
-		return customerRepository1.findAll();
-	}
-
+    public List<Customer> getListOfCustomers();
 }
